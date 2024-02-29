@@ -1,0 +1,32 @@
+---
+interface Props {
+	data: {
+		name: string;
+		coverImg: string;
+		location: string;
+		role: string;
+		social: {
+			title: string;
+			url: string;
+		}[];
+	};
+}
+
+const { data } = Astro.props;
+---
+
+<article class='w-[min(24rem,100%-2rem)] m-auto flex flex-col items-center bg-custom-800 p-10 text-sm rounded-2xl shadow-2xl'>
+	<img class='size-24 rounded-full' src={data.coverImg} alt={`cove portrait image of ${data.name}`} />
+	<h2 class='text-2xl font-bold mt-4 mb-2'>{data.name}</h2>
+	<p class='text-md font-bold text-primary-400'>{data.location}</p>
+	<p class='text-xs mt-6 mb-6 text-secondary-100'>{data.role}</p>
+	<section class='flex flex-col gap-4 w-full'>
+		{
+			data.social.map((item) => (
+				<a class='bg-secondary-200 text-center font-extrabold p-4 rounded-lg hover:bg-primary-400 hover:text-secondary-200 transition-colors duration-300' href={item.url}>
+					{item.title}
+				</a>
+			))
+		}
+	</section>
+</article>
